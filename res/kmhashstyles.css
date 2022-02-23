@@ -1,0 +1,75 @@
+body {
+	font: normal 12px/150% Arial, Helvetica, sans-serif; 
+	margin:10px; 
+	padding: 0px;
+}
+.topbanner{
+	
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #003D5C), color-stop(1, #0091D9) );
+  background:-moz-linear-gradient( center top, #003D5C 5%, #0091D9 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#003D5C', endColorstr='#0091D9');
+  background-color:#003D5C; 
+  color:#FFFFFF;  
+  font-weight: bold; 
+  border-left: 1px solid #0070A8; 
+  text-align:center;
+  font-size:24px;
+}
+.consoleinput{
+	font: normal 14px/150% Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace,  sans-serif; 
+	color: #044C8E; 
+}
+.consoleoutput{
+	font: normal 14px/150% Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace,  sans-serif; 
+	color:#A4450C; 
+	background-color: #fffff1; 
+}
+.datagrid table {
+	 border-collapse: collapse; 
+	 text-align: left; 	
+	 width: 100%; } 
+
+.datagrid {
+	font: normal 12px/150% Arial, Helvetica, sans-serif; 
+	background: #fff; 
+	overflow: hidden; 
+	border: 1px solid #006699; 
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	border-radius: 5px; }
+
+.datagrid table td, 
+.datagrid table th { 
+	padding: 1px 2px; }
+
+.datagrid table thead th {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );
+	background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');
+	background-color:#006699; 
+	color:#F7C10C; 
+	font-size: 12px; 
+	font-weight: bold; } 
+
+.datagrid table thead th:first-child { border: none; }
+
+.datagrid table tbody td { 
+	color: #00557F; 
+	font-size: 11px;
+	border-bottom: 1px solid #CDD8DE;
+	font-weight: normal; }
+
+.datagrid table tbody .alt td { 
+	background: #D8E5EB; 
+	color: #00557F; }
+.datagrid table tbody td:first-child { 
+	border-left: none; }
+.datagrid table tbody tr:last-child td { 
+	border-bottom: none; }
+a {
+    text-decoration: none;}
+a:hover
+{
+    color:#00557F;
+    text-decoration:underline;
+    cursor:pointer; }
