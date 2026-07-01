@@ -1,0 +1,76 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow1" cx="80%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#15212e"/>
+      <stop offset="60%" stop-color="#0d1117" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#14241f"/>
+      <stop offset="55%" stop-color="#0d1117" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accentline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2ee6a6"/>
+      <stop offset="100%" stop-color="#57b6ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- faint hex backdrop -->
+  <g font-family="'DejaVu Sans Mono', monospace" font-size="30" fill="#2ee6a6" opacity="0.05" letter-spacing="10">
+    <text x="60" y="90">a3f9 7c01 e4d2 9b88 5fa0 c317 2e6d 8419</text>
+    <text x="60" y="560">d72e 1ab5 90ff c8e1 4d7b 36a9 e052 7fbc</text>
+  </g>
+
+  <!-- top accent bar -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#accentline)"/>
+
+  <!-- main title: > hash calculations -->
+  <g font-family="'DejaVu Sans Mono', monospace" font-weight="bold">
+    <text x="90" y="270" font-size="78" fill="#e6edf3">
+      <tspan fill="#2ee6a6">&gt;</tspan> hash calculations</text>
+    <!-- blinking-style cursor block -->
+    <rect x="1000" y="228" width="26" height="54" fill="#2ee6a6"/>
+  </g>
+
+  <!-- subtitle -->
+  <text x="92" y="330" font-family="'DejaVu Sans Mono', monospace" font-size="30"
+        fill="#8b97a6" letter-spacing="4">compute hashes in your browser</text>
+
+  <!-- algorithm chips -->
+  <g font-family="'DejaVu Sans Mono', monospace" font-size="26" fill="#e6edf3">
+    <!-- row 1 -->
+    <g>
+      <rect x="90"  y="392" width="118" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="149" y="426" text-anchor="middle">MD5</text>
+      <rect x="222" y="392" width="140" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="292" y="426" text-anchor="middle">SHA-1</text>
+      <rect x="376" y="392" width="176" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="464" y="426" text-anchor="middle">SHA-256</text>
+      <rect x="566" y="392" width="176" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="654" y="426" text-anchor="middle">SHA-512</text>
+      <rect x="756" y="392" width="150" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="831" y="426" text-anchor="middle">SHA-3</text>
+      <rect x="920" y="392" width="176" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="1008" y="426" text-anchor="middle">Keccak</text>
+    </g>
+    <!-- row 2 -->
+    <g>
+      <rect x="90"  y="458" width="230" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="205" y="492" text-anchor="middle">RIPEMD-160</text>
+      <rect x="334" y="458" width="130" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="399" y="492" text-anchor="middle">HMAC</text>
+      <rect x="478" y="458" width="170" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="563" y="492" text-anchor="middle">PBKDF2</text>
+      <rect x="662" y="458" width="240" height="52" rx="10" fill="#161b22" stroke="#2b3441"/>
+      <text x="782" y="492" text-anchor="middle">WPA/WPA2 PSK</text>
+    </g>
+  </g>
+
+  <!-- footer line -->
+  <text x="90" y="580" font-family="'DejaVu Sans Mono', monospace" font-size="24"
+        fill="#5c6773" letter-spacing="2">runs locally · nothing is uploaded</text>
+</svg>
