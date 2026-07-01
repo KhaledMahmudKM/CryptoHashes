@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hash Calculator — MD5, SHA-1, SHA-256, SHA-3, RIPEMD-160, HMAC &amp; PBKDF2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Khaled Mahmud">
+<meta name="description" content="Free online hash calculator. Compute MD5, SHA-1, SHA-256/384/512, SHA-3, Keccak, RIPEMD-160, HMAC, PBKDF2 and WPA/WPA2 PSK keys live in your browser. All processing is local — nothing is uploaded.">
+<meta name="keywords" content="hash calculator, online hash, MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA-3, SHA3-256, Keccak, Keccak-256, RIPEMD-160, HMAC, HMAC-SHA256, PBKDF2, key derivation, WPA, WPA2, PSK, passphrase, checksum, message digest, cryptography, Web Crypto API">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://example.com/index.html">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hash Calculator — MD5, SHA, SHA-3, RIPEMD-160, HMAC & PBKDF2">
+<meta property="og:description" content="Compute MD5, SHA-1/256/512, SHA-3, Keccak, RIPEMD-160, HMAC, PBKDF2 and WPA/WPA2 PSK keys live in your browser. All processing stays local.">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hash Calculator — MD5, SHA, SHA-3, RIPEMD-160, HMAC & PBKDF2">
+<meta name="twitter:description" content="Compute MD5, SHA-1/256/512, SHA-3, Keccak, RIPEMD-160, HMAC, PBKDF2 and WPA/WPA2 PSK keys live in your browser. All processing stays local.">
+
+<script src="res/md5-ns.js"></script>
+<script src="res/ripemd160-ns.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha3/0.9.3/sha3.min.js"></script>
+<link rel="stylesheet" href="res/hashstyles.css">
+</head>
+<body>
+
+<header class="topbanner">
+  <h1 class="title"><span class="prompt">&gt;</span>hash&nbsp;calculations<span class="cursor"></span></h1>
+  <p class="byline">compute hashes in your browser</p>
+</header>
+
+<p class="intro">
+  An interactive playground for cryptographic hashing. Type into any section to compute message
+  digests, keyed MACs (HMAC), and derived keys live, then compare algorithms side by side. Each
+  section is tagged with how it's computed — by your browser's built-in cryptography or by an
+  external library. Everything runs locally in your browser; nothing you type is sent anywhere.
+</p>
+
+<!-- ============ Digests ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">01 / digest</span>
+    <h2>Cryptographic hashes</h2>
+    <span class="card__src native">browser · web crypto</span>
+  </div>
+  <div class="card__body">
+    <div class="field">
+      <label for="msg">input text</label>
+      <input class="consoleinput" type="text" id="msg" placeholder="type a message — hashes update live…" autocomplete="off">
+    </div>
+
+    <div class="controls" role="radiogroup" aria-label="Output encoding">
+      <span>output:</span>
+      <label><input type="radio" name="enc" value="hex" checked> hex</label>
+      <label><input type="radio" name="enc" value="b64"> base64</label>
+    </div>
+
+    <div id="digestRows"></div>
+  </div>
+</section>
+
+<!-- ============ HMAC ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">02 / hmac</span>
+    <h2>Keyed-hash MAC (HMAC)</h2>
+    <span class="card__src native">browser · web crypto</span>
+  </div>
+  <div class="card__body">
+    <div class="field">
+      <label for="hmac-msg">message</label>
+      <input class="consoleinput" type="text" id="hmac-msg" placeholder="message to authenticate…" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="hmac-key">key</label>
+      <input class="consoleinput" type="text" id="hmac-key" value="secret" autocomplete="off">
+    </div>
+    <div id="hmacRows"></div>
+  </div>
+</section>
+
+<!-- ============ External-library digests ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">03 / legacy</span>
+    <h2>MD5 &amp; RIPEMD-160</h2>
+    <span class="card__src lib">external library</span>
+  </div>
+  <div class="card__body">
+    <div class="field">
+      <label for="lib-msg">input text</label>
+      <input class="consoleinput" type="text" id="lib-msg" placeholder="type a message — hashes update live…" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="lib-key">key</label>
+      <input class="consoleinput" type="text" id="lib-key" value="secret" autocomplete="off">
+    </div>
+    <div id="libRows"></div>
+    <p class="hint" style="margin-top:1rem">
+      Computed by <a href="https://pajhome.org.uk/crypt/">Paul Johnston's MD5 and Jeremy Lin's RIPEMD-160</a> implementations
+      (<code>hex_md5</code>, <code>hex_rmd160</code> and their HMAC variants), loaded as separate
+      scripts. Output is hex only; these libraries don't share the hex/base64 toggle above.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SHA-3 family ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">04 / sponge</span>
+    <h2>SHA-3 &amp; Keccak</h2>
+    <span class="card__src lib">external library</span>
+  </div>
+  <div class="card__body">
+    <div class="field">
+      <label for="sha3-msg">input text</label>
+      <input class="consoleinput" type="text" id="sha3-msg" placeholder="type a message — hashes update live…" autocomplete="off">
+    </div>
+    <div id="sha3Rows"></div>
+    <p class="hint" style="margin-top:1rem">
+      Computed by <a href="https://github.com/emn178/js-sha3">js-sha3</a> (Chen Yi-Cyuan, MIT
+      License), loaded from cdnjs. SHA-3 is the FIPS 202 standard; Keccak is the original submission
+      it was based on. The two differ only by a padding byte, so their outputs don't match —
+      Keccak-256 is the variant used by Ethereum. Output is hex only.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PBKDF2 ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">05 / derive</span>
+    <h2>Password-based key derivation (PBKDF2)</h2>
+    <span class="card__src native">browser · web crypto</span>
+  </div>
+  <div class="card__body">
+    <form id="pbkdf2" onsubmit="return false">
+      <div class="field">
+        <label for="p-pass">password</label>
+        <input class="consoleinput" type="text" id="p-pass" placeholder="passphrase…" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="p-salt">salt</label>
+        <input class="consoleinput" type="text" id="p-salt" value="secret" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="p-iter">iterations</label>
+        <div>
+          <input class="consoleinput" type="number" id="p-iter" value="100000" min="1" max="1000000">
+          <div class="hint">PBKDF2 underlying hash:
+            <label style="margin-left:.4ch"><input type="radio" name="pHash" value="SHA-256" checked> SHA-256</label>
+            <label style="margin-left:.6ch"><input type="radio" name="pHash" value="SHA-512"> SHA-512</label>
+            <label style="margin-left:.6ch"><input type="radio" name="pHash" value="SHA-1"> SHA-1</label>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="p-bytes">key size (bytes)</label>
+        <input class="consoleinput" type="number" id="p-bytes" value="32" min="1" max="256">
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <div><button class="btn" id="p-go" type="button">Derive key</button></div>
+      </div>
+      <div class="row">
+        <div class="name">derived key</div>
+        <div class="out" id="p-out"></div>
+        <button class="copy" data-for="p-out" title="Copy" aria-label="Copy derived key"><i>⧉</i></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ WPA PSK ============ -->
+<section class="card">
+  <div class="card__head">
+    <span class="card__eyebrow">06 / wpa</span>
+    <h2>WPA/WPA2 passphrase &rarr; PSK</h2>
+    <span class="card__src native">browser · web crypto</span>
+  </div>
+  <div class="card__body">
+    <form id="psk" onsubmit="return false">
+      <div class="field">
+        <label for="w-pass">passphrase</label>
+        <input class="consoleinput" type="text" id="w-pass" placeholder="8–63 characters…" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="w-ssid">SSID</label>
+        <input class="consoleinput" type="text" id="w-ssid" value="mywifi" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>parameters</label>
+        <div class="hint" style="margin-top:0">PBKDF2-HMAC-SHA1 · 4096 iterations · 256-bit key — fixed by IEEE&nbsp;802.11i</div>
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <div><button class="btn" id="w-go" type="button">Compute PSK</button></div>
+      </div>
+      <div class="row">
+        <div class="name">raw PSK</div>
+        <div class="out" id="w-out"></div>
+        <button class="copy" data-for="w-out" title="Copy" aria-label="Copy PSK"><i>⧉</i></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<p class="note">
+  Computed locally; nothing is sent anywhere. SHA-1, MD5, and RIPEMD-160 are shown for learning only
+  — MD5 and SHA-1 are broken for collision resistance and unfit for security use. WPA/WPA2 PSK follows
+  IEEE 802.11i: PBKDF2-HMAC-SHA1(passphrase, SSID, 4096, 32).
+</p>
+
+<footer class="sitefooter">
+  <div class="copy-line">&copy; <span id="year">2026</span> Khaled Mahmud. All rights reserved.</div>
+  <p>
+    SHA family, HMAC, and PBKDF2 computed with the browser's Web Crypto API.
+    MD5 by Paul Johnston and RIPEMD-160 by Jeremy Lin / Paul Johnston, used under the BSD License.
+    SHA-3 and Keccak by js-sha3 (Chen Yi-Cyuan), used under the MIT License.
+  </p>
+</footer>
+
+
+<script src="res/hashapp.js"></script>
+</body>
+</html>
